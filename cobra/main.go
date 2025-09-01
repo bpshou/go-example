@@ -1,6 +1,6 @@
 package main
 
-import "acob/cmd"
+import "cobra_app/cmd"
 
 func main() {
 	cmd.Execute()
