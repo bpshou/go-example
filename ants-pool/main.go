@@ -39,16 +39,23 @@ func submitTasks(p *ants.Pool, taskCount int) {
 }
 
 func main() {
-	// 1. 创建协程池
-	pool := createPool(222)
+	// 创建协程池
+	pool := createPool(2)
 	defer pool.Release()
 
-	// 2. 打印初始容量
-	printPoolCapacity(pool)
+	fmt.Printf("[%s] 开始执行主程序\n", time.Now().Format("15:04:05.000"))
 
-	// 3. 调整池大小
-	tunePool(pool, 2)
+	// 提交任务
+	pool.Submit(func() {
+		fmt.Printf("[%s] 任务1开始执行\n", time.Now().Format("15:04:05.000"))
+		time.Sleep(time.Second * 2)
+		fmt.Printf("[%s] 任务1执行完成\n", time.Now().Format("15:04:05.000"))
+	})
 
-	// 4. 提交任务
-	submitTasks(pool, 11)
+	pool.Running()
+	fmt.Printf("[%s] Submit 后的代码立即执行\n", time.Now().Format("15:04:05.000"))
+
+	// 等待一段时间，确保能看到任务执行完成
+	time.Sleep(time.Second * 3)
+	fmt.Printf("[%s] 主程序结束\n", time.Now().Format("15:04:05.000"))
 }
