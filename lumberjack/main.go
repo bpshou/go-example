@@ -16,6 +16,11 @@ func main() {
 	slog.Info("hello world", "name", "Rose", "age", 18) // 这行日志不会输出
 
 	slog.Error("error !!!", "error", "error message") // 这行日志会输出
+
+	// 写入100000行日志，测试文件切割功能
+	for i := 0; i < 100000; i++ {
+		slog.Error("error test message !!!", "data", "data connection error")
+	}
 }
 
 var LogLevel = new(slog.LevelVar)
@@ -27,7 +32,7 @@ func InitLogger() {
 		MaxAge:     1,                  // 保留旧文件的最大天数
 		MaxBackups: 3,                  // 保留的最大旧文件数量
 		LocalTime:  true,               // 使用本地时间创建时间戳
-		Compress:   true,               // 是否压缩/归档旧文件
+		Compress:   false,              // 是否压缩/归档旧文件
 	}
 
 	LogLevel.Set(slog.LevelInfo)
