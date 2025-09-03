@@ -1,0 +1,3 @@
+Jwt:
+  Issuer: "gin-app"
+  SigningKey: "462df681-cbe7-41f1-8afb-c7d6e9963795"

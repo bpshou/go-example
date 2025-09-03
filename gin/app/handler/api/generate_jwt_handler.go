@@ -1,0 +1,11 @@
+package api
+
+import (
+	"gin_app/app/logic/api"
+
+	"github.com/gin-gonic/gin"
+)
+
+func GenerateJwtHandler(c *gin.Context) {
+	c.JSON(200, api.GenerateJwtLogic())
+}
