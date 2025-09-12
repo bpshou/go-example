@@ -1,6 +1,7 @@
 package api
 
 import (
+	"gin_app/app/contants"
 	"gin_app/app/core/auth"
 	"time"
 
@@ -9,20 +10,26 @@ import (
 )
 
 func GenerateJwtLogic() gin.H {
-	jwt := auth.NewJwt(auth.Jwt{
+	j := auth.NewJwt(auth.Jwt[contants.CustomClaims]{
 		Issuer:     viper.GetString("Jwt.Issuer"),
 		SigningKey: []byte(viper.GetString("Jwt.SigningKey")),
 	})
-	token, err := jwt.GenerateJwtToken("login", []string{"zhangsan", "12"}, time.Hour*24)
+	token, err := j.GenerateJwtTokenWithClaims(&contants.CustomClaims{
+		Uid:              10001,
+		Source:           "login",
+		Subject:          "gin-login",
+		Audience:         []string{"andy"},
+		RegisteredClaims: j.GetRegisteredClaimsDefault(time.Hour * 24),
+	})
 	if err != nil {
 		return gin.H{
-			"message": "Generate Jwt Failed",
 			"code":    500,
+			"message": "Generate Jwt Failed",
 		}
 	}
 	return gin.H{
+		"code":    0,
 		"message": "Generate Jwt Success",
-		"code":    200,
 		"data":    token,
 	}
 }

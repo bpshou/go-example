@@ -22,6 +22,7 @@ func ApiLogic() gin.H {
 	slog.Info("api logic", "name", name)
 
 	return gin.H{
+		"code":     0,
 		"message":  "Hello, World!",
 		"host":     host,
 		"port":     port,

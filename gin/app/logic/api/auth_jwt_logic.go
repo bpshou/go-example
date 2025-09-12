@@ -6,11 +6,10 @@ import (
 
 func AuthJwtLogic(c *gin.Context) gin.H {
 	return gin.H{
+		"code":    0,
 		"message": "Auth Jwt Success",
-		"code":    200,
 		"data": gin.H{
-			"subject":  c.GetString("subject"),
-			"audience": c.GetStringSlice("audience"),
+			"uid": c.GetInt64("uid"),
 		},
 	}
 }
