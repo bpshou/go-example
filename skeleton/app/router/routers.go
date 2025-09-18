@@ -8,10 +8,13 @@ import (
 )
 
 func RegisterRouters(engine *gin.Engine) {
-	router := engine.Group("/api")
+	apiGroup := engine.Group("/api")
 	{
-		router.GET("/", api.ApiHandler)
-		router.GET("/generate-jwt", api.GenerateJwtHandler)
-		router.Use(middleware.JwtMiddleware).GET("/auth-jwt", api.AuthJwtHandler)
+		apiGroup.GET("/", api.ApiHandler)
+		apiGroup.GET("/generate-jwt", api.GenerateJwtHandler)
+	}
+	apiJwtGroup := engine.Group("/api").Use(middleware.JwtMiddleware)
+	{
+		apiJwtGroup.GET("/auth-jwt", api.AuthJwtHandler)
 	}
 }

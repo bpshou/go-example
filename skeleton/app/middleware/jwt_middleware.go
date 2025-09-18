@@ -3,6 +3,7 @@ package middleware
 import (
 	"gin_app/app/contants"
 	"gin_app/app/core/auth"
+	"log/slog"
 	"net/http"
 	"strings"
 
@@ -42,6 +43,7 @@ func JwtMiddleware(c *gin.Context) {
 	var claims contants.CustomClaims
 	_, err := jwt.ParseJwtTokenWithClaims(token, &claims)
 	if err != nil {
+		slog.Error("jwt ParseJwtTokenWithClaims", "err", err)
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
 		c.Abort()
 		return
