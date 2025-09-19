@@ -1,15 +1,15 @@
-package {{.ServicePackage}}
+package api
 
 import (
-	"{{.LogicImportPackage}}"
+	"gin_app/app/logic/api"
 	"gin_app/app/types"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-func {{camelcase .ServiceName}}Handler(c *gin.Context) {
-	var req types.{{camelcase .ServiceName}}Req
+func ValidatorHandler(c *gin.Context) {
+	var req types.ValidatorReq
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"code":    -1,
@@ -18,7 +18,7 @@ func {{camelcase .ServiceName}}Handler(c *gin.Context) {
 		return
 	}
 
-	resp, err := api.{{camelcase .ServiceName}}Logic(&req)
+	resp, err := api.ValidatorLogic(c, &req)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":    -1,

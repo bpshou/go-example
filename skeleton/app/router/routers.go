@@ -12,6 +12,7 @@ func RegisterRouters(engine *gin.Engine) {
 	{
 		apiGroup.GET("/", api.ApiHandler)
 		apiGroup.GET("/generate-jwt", api.GenerateJwtHandler)
+		apiGroup.POST("/validator", api.ValidatorHandler)
 	}
 	apiJwtGroup := engine.Group("/api").Use(middleware.JwtMiddleware)
 	{

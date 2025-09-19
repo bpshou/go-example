@@ -1,13 +1,7 @@
 package {{.ServicePackage}}
 
-import (
-	"github.com/gin-gonic/gin"
-)
+import "gin_app/app/types"
 
-func {{title .ServiceName}}Logic(c *gin.Context) gin.H {
-	return gin.H{
-		"code":    0,
-		"message": "Success",
-		"data":    nil,
-	}
+func {{camelcase .ServiceName}}Logic(req *types.{{camelcase .ServiceName}}Req) (types.{{camelcase .ServiceName}}Resp, error) {
+	return types.{{camelcase .ServiceName}}Resp{}, nil
 }
