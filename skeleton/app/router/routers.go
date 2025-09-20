@@ -16,6 +16,6 @@ func RegisterRouters(engine *gin.Engine) {
 	}
 	apiJwtGroup := engine.Group("/api").Use(middleware.JwtMiddleware)
 	{
-		apiJwtGroup.GET("/auth-jwt", api.AuthJwtHandler)
+		apiJwtGroup.POST("/auth-jwt", api.AuthJwtHandler)
 	}
 }
