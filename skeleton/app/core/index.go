@@ -13,7 +13,7 @@ import (
 func Init() {
 	config.ViperInitEnv()
 	config.LoadViperConfig(config.ViperConfig{
-		Name: "config",
+		Name: "database",
 		Type: "yaml",
 		Path: "./etc",
 		Must: true,
@@ -26,18 +26,6 @@ func Init() {
 	})
 	config.LoadViperConfig(config.ViperConfig{
 		Name: "jwt",
-		Type: "yaml",
-		Path: "./etc",
-		Must: false,
-	})
-	config.LoadViperConfig(config.ViperConfig{
-		Name: "mysql",
-		Type: "yaml",
-		Path: "./etc",
-		Must: false,
-	})
-	config.LoadViperConfig(config.ViperConfig{
-		Name: "redis",
 		Type: "yaml",
 		Path: "./etc",
 		Must: false,
